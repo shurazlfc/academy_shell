@@ -1,21 +1,18 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers
 
-import 'package:academy_shell/models/card_model.dart';
+import 'package:academy_shell/models/Academy_card_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AcademicsScreen extends StatelessWidget {
+  static const String routeName = "/academicsScreen";
+  // static const String routeName = "/otp-page";
   const AcademicsScreen({Key? key}) : super(key: key);
-// AcademicsScreen
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.blue,
-          title: Center(child: Text('Academy Management')),
-        ),
+       
         body: Padding(
           padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
           child: SingleChildScrollView(
@@ -26,6 +23,7 @@ class AcademicsScreen extends StatelessWidget {
                 SvgPicture.asset(
                   'assets/images/academymanagement.svg',
                   height: 250,
+                  width: MediaQuery.of(context).size.width - 20,
                   fit: BoxFit.contain,
                 ),
                 Container(
@@ -36,15 +34,51 @@ class AcademicsScreen extends StatelessWidget {
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       shrinkWrap: true,
-                      crossAxisCount: 2,
+                      childAspectRatio: 8 / 6,
+                      crossAxisCount: 3,
                       children: gridElements
                           .map((e) => InkWell(
                                 onTap: () {
                                   Navigator.pushNamed(
                                       context, e.navigationRoute);
                                 },
-                                child: Column(
-                                  children: [Icon(e.icon), Text(e.text)],
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(5),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.4),
+                                        blurRadius: 2,
+                                        spreadRadius: 2,
+                                        offset: Offset(2, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  padding: EdgeInsets.all(4),
+                                  // elevation: 5,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          e.icon,
+                                          size: 40,
+                                          color: Colors.blue,
+                                        ),
+                                        Text(
+                                          e.text,
+                                          // overflow: TextOverflow.ellipsis,
+                                          maxLines: 2,
+                                          textAlign: TextAlign.center,
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ))
                           .toList()),

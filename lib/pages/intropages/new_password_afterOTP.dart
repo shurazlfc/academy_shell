@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_this
 
-import 'package:academy_shell/pages/login_page.dart';
+import 'package:academy_shell/pages/intropages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class NewPassword extends StatefulWidget {

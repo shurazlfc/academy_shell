@@ -1,14 +1,17 @@
 // import 'dart:js';
 
-import 'package:academy_shell/pages/login_page.dart';
-import 'package:academy_shell/pages/mainpages/MainScreen.dart';
-import 'package:academy_shell/pages/new_password_afterOTP.dart';
-import 'package:academy_shell/pages/onboarding_screen.dart';
-import 'package:academy_shell/pages/otp_page.dart';
-import 'package:academy_shell/pages/register_page.dart';
-import 'package:academy_shell/pages/resetpassword_page.dart';
+import 'package:academy_shell/pages/academy_management_pages/academy_users.dart';
+import 'package:academy_shell/pages/intropages/login_page.dart';
+import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
+import 'package:academy_shell/pages/intropages/new_password_afterOTP.dart';
+import 'package:academy_shell/pages/intropages/onboarding_screen.dart';
+import 'package:academy_shell/pages/intropages/otp_page.dart';
+import 'package:academy_shell/pages/intropages/register_page.dart';
+import 'package:academy_shell/pages/intropages/resetpassword_page.dart';
+import 'package:academy_shell/services/login.dart';
 import 'package:flutter/material.dart';
 
+//outside routes
 class RouteHandler {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -30,10 +33,15 @@ class RouteHandler {
       case OtpPage.routeName:
         return MaterialPageRoute(builder: ((context) => const OtpPage()));
 
+      case AcademyUsers.routeName:
+        return MaterialPageRoute(builder: (context) => AcademyUsers());
+
       case NewPassword.routeName:
         return MaterialPageRoute(builder: ((context) => const NewPassword()));
       default:
-        return MaterialPageRoute(builder: (context) => const MainScreen());
+        return MaterialPageRoute(builder: (context) => const LoginPage());
     }
   }
 }
+// now inside application routes 
+
