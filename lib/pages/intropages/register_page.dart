@@ -2,7 +2,7 @@
 
 // import 'dart:ffi';
 
-import 'package:academy_shell/pages/auth/bloc/auth_bloc.dart';
+// import 'package:academy_shell/pages/auth/bloc/auth_bloc.dart';
 import 'package:academy_shell/pages/intropages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,10 +133,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     padding: EdgeInsets.only(top: 45, right: 25, left: 25),
                     child: InkWell(
                       onTap: () {
-                        BlocProvider.of<AuthBloc>(context).add(
-                            RegistrationEvent(
-                                password: password,
-                                username: emailController.text));
+                        // BlocProvider.of<AuthBloc>(context).add(
+                        //     RegistrationEvent(
+                        //         password: password,
+                        //         username: emailController.text));
                         // Navigator.pushNamed(context, LoginPage.routeName);
                       },
                       child: Container(

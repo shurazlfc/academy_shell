@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Login {
-  fetchlogin(String username, String password, context) async {
+ Future<LoginResponse?> fetchlogin(String username, String password, context) async {
     http.Response? response = await http.post(Uri.parse('http://dev-system.academyshell.com/api/academy-user/login'), 
     headers: {  
       "Content-Type": "application/json", 
@@ -28,14 +28,14 @@ class Login {
       
       var loginData = LoginResponse.fromJson(bodyData);
     
-    
-
-      Navigator.pushNamed(context, MainScreen.routeName);
+    print(loginData);
+    return loginData;
   //  Ncell@1558
      
     }else{
       // ignore: prefer_const_constructors
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid username or password")));
+      return null;
     }
   
 
@@ -44,3 +44,4 @@ class Login {
   } 
   
 }
+

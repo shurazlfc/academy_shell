@@ -34,13 +34,26 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     // TODO: implement initState
+    fetchEmailAndPassword();
     super.initState();
+  }
+
+  fetchEmailAndPassword() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _emailController.text = pref.getString("email") ?? "";
+    // _passwordController.text = pref.getString("password") ?? "";
+    setState(() {});
   }
 
   validateAndSave() async {
     if (_formKey.currentState!.validate()) {
-      await Login()
+      var login = await Login()
           .fetchlogin(_emailController.text, _passwordController.text, context);
+      if (login != null) {
+        SharedPreferences _prefs = await SharedPreferences.getInstance();
+        _prefs.setString("token", login.token ?? "");
+        Navigator.pushNamed(context, MainScreen.routeName);
+      }
     } else {
       SnackBar(
         content: Text('invalid credentials000'),

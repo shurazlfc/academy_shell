@@ -3,23 +3,15 @@
 import 'dart:async';
 
 import 'package:academy_shell/constants/app_constants.dart';
-import 'package:academy_shell/pages/academy_management_pages/academy_users.dart';
 import 'package:academy_shell/pages/intropages/login_page.dart';
 import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
-import 'package:academy_shell/pages/intropages/new_password_afterOTP.dart';
 import 'package:academy_shell/pages/intropages/onboarding_screen.dart';
-import 'package:academy_shell/pages/intropages/otp_page.dart';
-import 'package:academy_shell/pages/intropages/register_page.dart';
-import 'package:academy_shell/pages/intropages/resetpassword_page.dart';
 
 import 'package:academy_shell/routes/route_handler.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-String finalEmail = '';
-String finalPassword = '';
+String accessToken = "";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,11 +51,9 @@ class _MyAppState extends State<MyApp> {
   getValidationData() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var ObtainedEmail = sharedPreferences.getString('email') ?? "";
-    var ObtainedPassword = sharedPreferences.getString('password') ?? "";
+
     setState(() {
-      finalEmail = ObtainedEmail;
-      finalPassword = ObtainedPassword;
+      accessToken = sharedPreferences.getString("token") ?? "";
     });
   }
 
@@ -78,9 +68,9 @@ class _MyAppState extends State<MyApp> {
       //     ? OnboardingScreen.routeName
       //     : LoginPage.routeName,
       onGenerateRoute: RouteHandler.generateRoute,
-      home: !widget.onboardingDisplayed
+      home: !(widget.onboardingDisplayed)
           ? OnboardingScreen()
-          : (finalEmail.isNotEmpty && finalPassword.isNotEmpty)
+          : (accessToken.isNotEmpty)
               ? MainScreen()
               : LoginPage(),
     );

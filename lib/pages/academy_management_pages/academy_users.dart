@@ -14,7 +14,7 @@ class AcademyUsers extends StatefulWidget {
 }
 
 class _AcademyUsersState extends State<AcademyUsers> {
-  AcademyUserData? academyUserData;
+  List<AcademyUserData>? academyUserData = [];
 
   @override
   void initState() {
@@ -67,31 +67,60 @@ class _AcademyUsersState extends State<AcademyUsers> {
 //   String email;
 //   String role;
 //   String lastname;
-              rows: names
+              rows: academyUserData!
                   .map((name) => DataRow(cells: [
+                        //                   id;
+                        // String? name;
+                        // String? mobileNumber;
+                        // String? email;
+                        // int? academyId;
+                        // Academy? academy;
+                        // String? createdAt;
+                        // int? role;
+                        // RoleParsed? roleParsed;
+                        // List<Permissions>? permissions;
+
                         DataCell(
-                          Text(name.firstname),
+                          Text(name.id.toString()),
                         ),
                         DataCell(
-                          Text(name.email),
+                          Text(name.name!),
                         ),
                         DataCell(
                           Text(
-                            name.role,
+                            name.email!,
                           ),
                         ),
                         DataCell(
-                          Text(name.lastname),
+                          Text(name.roleParsed!.name!),
                         ),
                         DataCell(Row(
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  print(names.indexOf(name));
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text("Edit"),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              TextFormField(),
+                                              
+                                              
+                                              Text(name.name!),
+                                              Text(name.role.toString()),
+                                              Text(name.email!),
+                                            ],
+                                          ),
+                                        );
+                                      });
+                                  print(academyUserData!.indexOf(name));
                                 },
                                 icon: Icon(Icons.edit)),
-                            IconButton(
-                                onPressed: () {}, icon: Icon(Icons.recycling))
+                            // IconButton(
+                            //     onPressed: () {}, icon: Icon(Icons.recycling))
                           ],
                         )),
                       ]))
@@ -187,30 +216,30 @@ class Name {
   });
 }
 
-var names = <Name>[
-  Name(
-      firstname: 'jack',
-      email: 'jack@gmail.com',
-      role: 'admin',
-      lastname: 'lastname'),
-  Name(
-      firstname: 'jack',
-      email: 'jack@gmail.com',
-      role: 'admin',
-      lastname: 'lastname'),
-  Name(
-      firstname: 'jack',
-      email: 'jack@gmail.com',
-      role: 'admin',
-      lastname: 'lastname'),
-  Name(
-      firstname: 'jack',
-      email: 'jack@gmail.com',
-      role: 'admin',
-      lastname: 'lastname'),
-  Name(
-      firstname: 'jack',
-      email: 'jack@gmail.com',
-      role: 'admin',
-      lastname: 'lastname')
-];
+// var names = <Name>[
+//   Name(
+//       firstname: 'jack',
+//       email: 'jack@gmail.com',
+//       role: 'admin',
+//       lastname: 'lastname'),
+//   Name(
+//       firstname: 'jack',
+//       email: 'jack@gmail.com',
+//       role: 'admin',
+//       lastname: 'lastname'),
+//   Name(
+//       firstname: 'jack',
+//       email: 'jack@gmail.com',
+//       role: 'admin',
+//       lastname: 'lastname'),
+//   Name(
+//       firstname: 'jack',
+//       email: 'jack@gmail.com',
+//       role: 'admin',
+//       lastname: 'lastname'),
+//   Name(
+//       firstname: 'jack',
+//       email: 'jack@gmail.com',
+//       role: 'admin',
+//       lastname: 'lastname')
+// ];
