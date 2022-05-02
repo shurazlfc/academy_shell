@@ -29,8 +29,8 @@ class StudentScreen extends StatelessWidget {
                       primary: false,
                       physics: NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(20),
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
                       shrinkWrap: true,
                       childAspectRatio: 8 / 6,
                       crossAxisCount: 2,
@@ -65,7 +65,7 @@ class StudentScreen extends StatelessWidget {
                                       children: [
                                         Icon(
                                           e.icon,
-                                          size: 60,
+                                          size: 50,
                                           color: Colors.blue,
                                         ),
                                         Text(

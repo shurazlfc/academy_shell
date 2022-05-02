@@ -91,9 +91,9 @@ class _AcademyUsersState extends State<AcademyUsers> {
                             name.email!,
                           ),
                         ),
-                        DataCell(
-                          Text(name.roleParsed!.name!),
-                        ),
+                        DataCell(name.roleParsed?.name != null
+                            ? Text(name.roleParsed!.name!)
+                            : Text('N/A')),
                         DataCell(Row(
                           children: [
                             IconButton(
@@ -107,8 +107,6 @@ class _AcademyUsersState extends State<AcademyUsers> {
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               TextFormField(),
-                                              
-                                              
                                               Text(name.name!),
                                               Text(name.role.toString()),
                                               Text(name.email!),

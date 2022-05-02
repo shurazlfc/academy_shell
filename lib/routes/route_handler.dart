@@ -1,5 +1,7 @@
 // import 'dart:js';
 
+// ignore_for_file: unused_import
+
 import 'package:academy_shell/pages/academy_management_pages/academy_users.dart';
 import 'package:academy_shell/pages/intropages/login_page.dart';
 import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
@@ -39,7 +41,7 @@ class RouteHandler {
       case NewPassword.routeName:
         return MaterialPageRoute(builder: ((context) => const NewPassword()));
       default:
-        return MaterialPageRoute(builder: (context) => const LoginPage());
+        return MaterialPageRoute(builder: (context) => const MainScreen());
     }
   }
 }

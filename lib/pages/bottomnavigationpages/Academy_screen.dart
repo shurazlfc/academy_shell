@@ -12,7 +12,6 @@ class AcademicsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-       
         body: Padding(
           padding: const EdgeInsets.only(top: 10, right: 20, left: 20),
           child: SingleChildScrollView(
@@ -31,8 +30,8 @@ class AcademicsScreen extends StatelessWidget {
                       primary: false,
                       physics: NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(20),
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
                       shrinkWrap: true,
                       childAspectRatio: 8 / 6,
                       crossAxisCount: 3,
@@ -58,7 +57,7 @@ class AcademicsScreen extends StatelessWidget {
                                   padding: EdgeInsets.all(4),
                                   // elevation: 5,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
+                                    padding: const EdgeInsets.only(top: 5.0),
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -67,7 +66,7 @@ class AcademicsScreen extends StatelessWidget {
                                       children: [
                                         Icon(
                                           e.icon,
-                                          size: 40,
+                                          size: 20,
                                           color: Colors.blue,
                                         ),
                                         Text(
