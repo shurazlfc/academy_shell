@@ -3,7 +3,7 @@
 // import 'dart:ffi';
 
 // import 'package:academy_shell/pages/auth/bloc/auth_bloc.dart';
-import 'package:academy_shell/pages/intropages/login_page.dart';
+import 'package:academy_shell/pages/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';

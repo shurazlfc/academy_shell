@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:academy_shell/constants/app_constants.dart';
-import 'package:academy_shell/pages/intropages/login_page.dart';
+import 'package:academy_shell/pages/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -3,14 +3,14 @@
 // ignore_for_file: unused_import
 
 import 'package:academy_shell/pages/academy_management_pages/academy_users.dart';
-import 'package:academy_shell/pages/intropages/login_page.dart';
-import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
-import 'package:academy_shell/pages/intropages/new_password_afterOTP.dart';
-import 'package:academy_shell/pages/intropages/onboarding_screen.dart';
-import 'package:academy_shell/pages/intropages/otp_page.dart';
-import 'package:academy_shell/pages/intropages/register_page.dart';
-import 'package:academy_shell/pages/intropages/resetpassword_page.dart';
-import 'package:academy_shell/services/login.dart';
+import 'package:academy_shell/pages/auth/login_page.dart';
+import 'package:academy_shell/pages/views/main_screen.dart';
+import 'package:academy_shell/pages/auth/new_password_afterOTP.dart';
+import 'package:academy_shell/pages/auth/onboarding_screen.dart';
+import 'package:academy_shell/pages/auth/otp_page.dart';
+import 'package:academy_shell/pages/auth/register_page.dart';
+import 'package:academy_shell/pages/auth/resetpassword_page.dart';
+import 'package:academy_shell/services/login_services.dart';
 import 'package:flutter/material.dart';
 
 //outside routes
@@ -36,7 +36,7 @@ class RouteHandler {
         return MaterialPageRoute(builder: ((context) => const OtpPage()));
 
       case AcademyUsers.routeName:
-        return MaterialPageRoute(builder: (context) => AcademyUsers());
+        return MaterialPageRoute(builder: (context) => const AcademyUsers());
 
       case NewPassword.routeName:
         return MaterialPageRoute(builder: ((context) => const NewPassword()));

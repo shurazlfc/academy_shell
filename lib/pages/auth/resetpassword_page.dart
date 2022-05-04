@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:academy_shell/pages/intropages/otp_page.dart';
+import 'package:academy_shell/pages/auth/otp_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

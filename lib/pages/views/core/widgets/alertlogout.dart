@@ -1,7 +1,6 @@
+import 'package:academy_shell/pages/auth/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../pages/intropages/login_page.dart';
 
 getAlertDialogbox(BuildContext context) {
   showDialog(

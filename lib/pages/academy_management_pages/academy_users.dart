@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, duplicate_ignore
 
-import 'package:academy_shell/services/AcademyUserdata_response.dart';
-import 'package:academy_shell/services/dataline.dart';
+import 'package:academy_shell/services/academy_user_services.dart';
+import 'package:academy_shell/models/academy_user_model.dart';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -14,19 +15,21 @@ class AcademyUsers extends StatefulWidget {
 }
 
 class _AcademyUsersState extends State<AcademyUsers> {
+  bool isloaded = false;
   List<AcademyUserData>? academyUserData = [];
 
   @override
   void initState() {
     super.initState();
-    fetchAcademyUsers();
+    getdata();
   }
 
-  fetchAcademyUsers() async {
-    academyUserData = await AcademyUserServices().fetchAcademyData();
-    if (mounted) {
-      setState(() {});
-    }
+  getdata() async {
+    var data = await AcademyUserServices().getAcademyUsers();
+    setState(() {
+      academyUserData = data;
+      isloaded = true;
+    });
   }
 
   Widget bodyData() => Padding(

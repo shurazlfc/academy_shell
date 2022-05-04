@@ -1,23 +1,25 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_import, prefer_typing_uninitialized_variables
 
 import 'dart:async';
 
 import 'package:academy_shell/constants/app_constants.dart';
-import 'package:academy_shell/pages/intropages/introductorypage/Introductorypage.dart';
-import 'package:academy_shell/pages/intropages/login_page.dart';
-import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
-import 'package:academy_shell/pages/intropages/onboarding_screen.dart';
+import 'package:academy_shell/pages/views/introduction_screen.dart';
+import 'package:academy_shell/pages/auth/login_page.dart';
+import 'package:academy_shell/pages/views/main_screen.dart';
+import 'package:academy_shell/pages/auth/onboarding_screen.dart';
 
 import 'package:academy_shell/routes/route_handler.dart';
+import 'package:academy_shell/widgets/Theme/themeprovider.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String accessToken = "";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.removeAfter(initialization);
-  // await initialization();
+
   final prefs = await SharedPreferences.getInstance();
   bool onboardingDisplayed =
       prefs.getBool(AppConstants.onBoardingDisplayed) ?? false;
@@ -44,7 +46,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getValidationData();
   }
@@ -60,20 +61,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // theme: ThemeData.dark(),
-      title: "Academy Shell",
-      // theme: ThemeData.dark(),
-      home: IntroductoryPage(),
-      // initialRoute: onboardingDisplayed
-      //     ? OnboardingScreen.routeName
-      //     : LoginPage.routeName,
-      onGenerateRoute: RouteHandler.generateRoute,
-      // home: !(widget.onboardingDisplayed)
-      //     ? OnboardingScreen()
-      //     : (accessToken.isNotEmpty)
-      //         ? MainScreen()
-      //         : LoginPage(),
+    return ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return MaterialApp(
+          themeMode: themeProvider.themeMode,
+          theme: MyThemes.lightTheme,
+          darkTheme: MyThemes.darkTheme,
+          title: "Academy Shell",
+          onGenerateRoute: RouteHandler.generateRoute,
+          home: !(widget.onboardingDisplayed)
+              ? OnboardingScreen()
+              : (accessToken.isNotEmpty)
+                  ? MainScreen()
+                  : LoginPage(),
+        );
+      },
     );
   }
 }

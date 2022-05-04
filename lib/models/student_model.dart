@@ -1,4 +1,4 @@
-import 'package:academy_shell/pages/bottomnavigationpages/Academy_screen.dart';
+import 'package:academy_shell/pages/views/core/academy_management_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 

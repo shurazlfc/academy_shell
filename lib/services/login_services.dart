@@ -2,8 +2,8 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
-import 'package:academy_shell/services/login_response_model.dart';
+import 'package:academy_shell/pages/views/main_screen.dart';
+import 'package:academy_shell/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,7 +28,7 @@ class Login {
       
       var loginData = LoginResponse.fromJson(bodyData);
     
-    print(loginData);
+
     return loginData;
   //  Ncell@1558
      
