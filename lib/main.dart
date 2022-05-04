@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:academy_shell/constants/app_constants.dart';
+import 'package:academy_shell/pages/intropages/introductorypage/Introductorypage.dart';
 import 'package:academy_shell/pages/intropages/login_page.dart';
 import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
 import 'package:academy_shell/pages/intropages/onboarding_screen.dart';
@@ -63,16 +64,16 @@ class _MyAppState extends State<MyApp> {
       // theme: ThemeData.dark(),
       title: "Academy Shell",
       // theme: ThemeData.dark(),
-      // home: TestingApi(),
+      home: IntroductoryPage(),
       // initialRoute: onboardingDisplayed
       //     ? OnboardingScreen.routeName
       //     : LoginPage.routeName,
       onGenerateRoute: RouteHandler.generateRoute,
-      home: !(widget.onboardingDisplayed)
-          ? OnboardingScreen()
-          : (accessToken.isNotEmpty)
-              ? MainScreen()
-              : LoginPage(),
+      // home: !(widget.onboardingDisplayed)
+      //     ? OnboardingScreen()
+      //     : (accessToken.isNotEmpty)
+      //         ? MainScreen()
+      //         : LoginPage(),
     );
   }
 }

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_print, avoid_unnecessary_containers
 
-import 'package:academy_shell/app_text.dart';
+import 'package:academy_shell/widgets/app_text.dart';
 import 'package:academy_shell/pages/intropages/new_password_afterOTP.dart';
 import 'package:academy_shell/widgets/app_large_Text.dart';
 import 'package:flutter/material.dart';
