@@ -1,8 +1,10 @@
 import 'package:academy_shell/models/Student_Management_card_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/Academy_card_model.dart';
+import '../../widgets/Theme/themeprovider.dart';
 
 class StudentScreen extends StatelessWidget {
   const StudentScreen({Key? key}) : super(key: key);
@@ -40,43 +42,46 @@ class StudentScreen extends StatelessWidget {
                                   Navigator.pushNamed(
                                       context, e.navigationRoute);
                                 },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(5),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.4),
-                                        blurRadius: 2,
-                                        spreadRadius: 2,
-                                        offset: Offset(2, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  padding: EdgeInsets.all(4),
-                                  // elevation: 5,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          e.icon,
-                                          size: 50,
-                                          color: Colors.blue,
+                                child: Consumer<ThemeProvider>(
+                                  builder: (context,themeProvider,_){
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color: themeProvider.isDarkMode? MyThemes.darkTheme.primaryColor : MyThemes.lightTheme.primaryColor,
+                                      borderRadius: BorderRadius.circular(5),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.4),
+                                          blurRadius: 2,
+                                          spreadRadius: 2,
+                                          offset: Offset(2, 2),
                                         ),
-                                        Text(
-                                          e.text,
-                                          // overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
-                                          textAlign: TextAlign.center,
-                                        )
                                       ],
                                     ),
-                                  ),
+                                    padding: EdgeInsets.all(4),
+                                    // elevation: 5,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            e.icon,
+                                            size: 50,
+                                            color: themeProvider.isDarkMode? MyThemes.darkTheme.iconTheme.color : MyThemes.lightTheme.iconTheme.color,
+                                          ),
+                                          Text(
+                                            e.text,
+                                            // overflow: TextOverflow.ellipsis,
+                                            maxLines: 2,
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  );}
                                 ),
                               ))
                           .toList()),

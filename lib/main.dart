@@ -8,7 +8,10 @@ import 'package:academy_shell/pages/bottomnavigationpages/MainScreen.dart';
 import 'package:academy_shell/pages/intropages/onboarding_screen.dart';
 
 import 'package:academy_shell/routes/route_handler.dart';
+import 'package:academy_shell/widgets/Theme/themeprovider.dart';
+import 'package:academy_shell/widgets/profile_page2.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String accessToken = "";
@@ -59,20 +62,26 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // theme: ThemeData.dark(),
-      title: "Academy Shell",
-      // theme: ThemeData.dark(),
-      // home: TestingApi(),
-      // initialRoute: onboardingDisplayed
-      //     ? OnboardingScreen.routeName
-      //     : LoginPage.routeName,
-      onGenerateRoute: RouteHandler.generateRoute,
-      home: !(widget.onboardingDisplayed)
-          ? OnboardingScreen()
-          : (accessToken.isNotEmpty)
-              ? MainScreen()
-              : LoginPage(),
+    return ChangeNotifierProvider(create: (context) => ThemeProvider(),
+    builder: (context, _) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+      return MaterialApp(
+        themeMode: themeProvider.themeMode,
+        theme: MyThemes.lightTheme,
+        darkTheme: MyThemes.darkTheme,
+        title: "Academy Shell",
+        // theme: ThemeData.dark(),
+        home: ProfilePageTwo(),
+        // initialRoute: onboardingDisplayed
+        //     ? OnboardingScreen.routeName
+        //     : LoginPage.routeName,
+        // onGenerateRoute: RouteHandler.generateRoute,
+        // home: !(widget.onboardingDisplayed)
+        //     ? OnboardingScreen()
+        //     : (accessToken.isNotEmpty)
+        //         ? MainScreen()
+        //         : LoginPage(),
+      );},
     );
   }
 }

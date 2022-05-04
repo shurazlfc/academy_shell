@@ -63,178 +63,183 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 20),
-              height: 150,
-              width: 150,
-              child: Image.network(
-                  'http://dev-admin.academyshell.com/img/temp-logo.82162f05.jpg'),
-            ),
-            Form(
-              key: _formKey,
-              child: Container(
-                padding: EdgeInsets.only(top: 25, right: 25, left: 25),
-                height: 220,
-                width: MediaQuery.of(context).size.width,
-                child: ListView(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    TextFormField(
-                      validator: (value) {
-                        value = _emailController.text;
-                        if (value.isEmpty) {
-                          return "username required";
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Email',
-                          prefixIcon: Icon(Icons.mail),
-                          suffixIcon: _emailController.text.isEmpty
-                              ? Container(
-                                  width: 0,
-                                )
-                              : IconButton(
-                                  onPressed: () {
-                                    _emailController.clear();
-                                  },
-                                  icon: Icon(Icons.close)),
-                          hintText: 'abcd@gmail.com'),
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                    TextFormField(
-                        controller: _passwordController,
-                        obscureText: isPasswordVisible,
+    return WillPopScope(
+      onWillPop: ()async{
+        return false;
+      },
+      child: SafeArea(
+        child: Scaffold(
+            body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: 20),
+                height: 150,
+                width: 150,
+                child: Image.network(
+                    'http://dev-admin.academyshell.com/img/temp-logo.82162f05.jpg'),
+              ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: EdgeInsets.only(top: 25, right: 25, left: 25),
+                  height: 220,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      TextFormField(
                         validator: (value) {
-                          value = _passwordController.text;
+                          value = _emailController.text;
                           if (value.isEmpty) {
-                            return "password required";
+                            return "username required";
+                          } else {
+                            return null;
                           }
-                          return null;
                         },
+                        controller: _emailController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
-                            labelText: 'Password',
-                            prefixIcon: Icon(Icons.lock_open),
-                            suffixIcon: IconButton(
-                              icon: isPasswordVisible
-                                  ? Icon(Icons.visibility_off)
-                                  : Icon(Icons.visibility),
-                              onPressed: () {
-                                setState(() {
-                                  isPasswordVisible = !isPasswordVisible;
-                                });
-                              },
-                            ))),
+                            labelText: 'Email',
+                            prefixIcon: Icon(Icons.mail),
+                            suffixIcon: _emailController.text.isEmpty
+                                ? Container(
+                                    width: 0,
+                                  )
+                                : IconButton(
+                                    onPressed: () {
+                                      _emailController.clear();
+                                    },
+                                    icon: Icon(Icons.close)),
+                            hintText: 'abcd@gmail.com'),
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      TextFormField(
+                          controller: _passwordController,
+                          obscureText: isPasswordVisible,
+                          validator: (value) {
+                            value = _passwordController.text;
+                            if (value.isEmpty) {
+                              return "password required";
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Password',
+                              prefixIcon: Icon(Icons.lock_open),
+                              suffixIcon: IconButton(
+                                icon: isPasswordVisible
+                                    ? Icon(Icons.visibility_off)
+                                    : Icon(Icons.visibility),
+                                onPressed: () {
+                                  setState(() {
+                                    isPasswordVisible = !isPasswordVisible;
+                                  });
+                                },
+                              ))),
+                    ],
+                  ),
+                ),
+              ),
+              InkWell(
+                onTap: () async {
+                  validateAndSave();
+                  final SharedPreferences sharedPreferences =
+                      await SharedPreferences.getInstance();
+                  sharedPreferences.setString('email', _emailController.text);
+                  sharedPreferences.setString(
+                      'password', _passwordController.text);
+                  // await Navigator.pushNamed(context, MainScreen.routeName);
+                },
+                child: Container(
+                  color: Colors.blue,
+                  height: 50,
+                  width: MediaQuery.of(context).size.width - 50,
+                  child: Center(
+                      child: Text(
+                    'Login',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+                child: Text('OR'),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, ResetPasswordPage.routeName);
+                },
+                child: Container(
+                  color: Colors.blue,
+                  height: 50,
+                  width: MediaQuery.of(context).size.width - 50,
+                  child: Center(
+                      child: Text('Reset Password',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold))),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 25, top: 25),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, RegisterPage.routeName);
+                      },
+                      child: Container(
+                        // color: Colors.red,
+                        decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(10)),
+                        height: 30,
+                        width: 100,
+                        child: Center(
+                            child: Text(
+                          'Register Here',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        )),
+                      ),
+                    )
                   ],
                 ),
               ),
-            ),
-            InkWell(
-              onTap: () async {
-                validateAndSave();
-                final SharedPreferences sharedPreferences =
-                    await SharedPreferences.getInstance();
-                sharedPreferences.setString('email', _emailController.text);
-                sharedPreferences.setString(
-                    'password', _passwordController.text);
-                // await Navigator.pushNamed(context, MainScreen.routeName);
-              },
-              child: Container(
-                color: Colors.blue,
-                height: 50,
-                width: MediaQuery.of(context).size.width - 50,
-                child: Center(
-                    child: Text(
-                  'Login',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                )),
+              SizedBox(
+                height: 10,
               ),
-            ),
-            SizedBox(
-              height: 20,
-              child: Text('OR'),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, ResetPasswordPage.routeName);
-              },
-              child: Container(
-                color: Colors.blue,
-                height: 50,
-                width: MediaQuery.of(context).size.width - 50,
-                child: Center(
-                    child: Text('Reset Password',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold))),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 25, top: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, RegisterPage.routeName);
-                    },
-                    child: Container(
-                      // color: Colors.red,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(10)),
-                      height: 30,
-                      width: 100,
-                      child: Center(
-                          child: Text(
-                        'Register Here',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      )),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onLongPress: () {
-                Navigator.pushNamed(context, MainScreen.routeName);
-              },
-              child: Container(
-                height: 100,
-                width: 150,
-                child: Center(
-                    child: SvgPicture.asset('assets/images/fingerprint.svg')),
-              ),
-            )
-          ],
-        ),
-      )),
+              InkWell(
+                onLongPress: () {
+                  Navigator.pushNamed(context, MainScreen.routeName);
+                },
+                child: Container(
+                  height: 100,
+                  width: 150,
+                  child: Center(
+                      child: SvgPicture.asset('assets/images/fingerprint.svg')),
+                ),
+              )
+            ],
+          ),
+        )),
+      ),
     );
   }
 }

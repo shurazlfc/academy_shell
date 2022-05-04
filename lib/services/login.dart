@@ -28,7 +28,7 @@ class Login {
       
       var loginData = LoginResponse.fromJson(bodyData);
     
-    print(loginData);
+
     return loginData;
   //  Ncell@1558
      

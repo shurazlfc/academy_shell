@@ -107,7 +107,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    Theme.of(context).primaryColor.withOpacity(0.5);
+    //Theme.of(context).primaryColor.withOpacity(0.5);
     return Container(
       color: widget.backgroundColor ?? Theme.of(context).backgroundColor,
       height: widget.barHeight,
@@ -137,7 +137,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Icon(_icon,
-                        color: Colors.white, size: widget.iconHeight),
+                        color: Colors.white, size: widget.iconHeight,),
                   ),
                 ),
               ),
@@ -151,7 +151,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
               painter: NavCustomPainter(
                   _pos,
                   _length,
-                  widget.foregroundColor ?? Colors.blue,
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black : Colors.blue,
                   Directionality.of(context)),
               child: Container(
                 height: widget.barHeight,
