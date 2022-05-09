@@ -29,7 +29,7 @@ class AcademyUserData {
     email = json['email'];
     academyId = json['academy_id'];
     academy =
-        json['academy'] != null ? new Academy.fromJson(json['academy']) : null;
+        json['academy'] != null ? new Academy.fromJson(json['academy']) : null; 
     createdAt = json['created_at'];
     role = json['role'];
     roleParsed = json['roleParsed'] != null

@@ -2,8 +2,9 @@
 
 // ignore_for_file: unused_import
 
-import 'package:academy_shell/pages/academy_management_pages/academy_users.dart';
 import 'package:academy_shell/pages/auth/login_page.dart';
+import 'package:academy_shell/pages/user_management_pages/Roles/roles.dart';
+import 'package:academy_shell/pages/user_management_pages/academic_user/academy_users.dart';
 import 'package:academy_shell/pages/views/main_screen.dart';
 import 'package:academy_shell/pages/auth/new_password_afterOTP.dart';
 import 'package:academy_shell/pages/auth/onboarding_screen.dart';
@@ -34,6 +35,9 @@ class RouteHandler {
 
       case OtpPage.routeName:
         return MaterialPageRoute(builder: ((context) => const OtpPage()));
+
+      case Roles.routeName:
+        return MaterialPageRoute(builder: (context) => const Roles());
 
       case AcademyUsers.routeName:
         return MaterialPageRoute(builder: (context) => const AcademyUsers());

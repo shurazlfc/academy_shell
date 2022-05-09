@@ -1,4 +1,5 @@
-import 'package:academy_shell/pages/academy_management_pages/academy_users.dart';
+import 'package:academy_shell/pages/user_management_pages/Roles/roles.dart';
+import 'package:academy_shell/pages/user_management_pages/academic_user/academy_users.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -22,7 +23,7 @@ List<UserModelCard> userElements = [
   ),
   UserModelCard(
     text: "Roles",
-    navigationRoute: "/home",
+    navigationRoute: Roles.routeName,
     icon: MdiIcons.shieldAccountOutline,
   ),
   UserModelCard(

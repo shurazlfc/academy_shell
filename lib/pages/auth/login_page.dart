@@ -24,13 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool isPasswordVisible = false;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   emailController.addListener(() {
-  //     setState(() {});
-  //   });
-  // }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -64,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         return false;
       },
       child: SafeArea(

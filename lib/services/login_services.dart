@@ -2,10 +2,13 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:academy_shell/constants/app_constants.dart';
+import 'package:academy_shell/injector.dart';
 import 'package:academy_shell/pages/views/main_screen.dart';
 import 'package:academy_shell/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login {
  Future<LoginResponse?> fetchlogin(String username, String password, context) async {
@@ -13,7 +16,7 @@ class Login {
     headers: {  
       "Content-Type": "application/json", 
       "Accept": "application/json",
-      // "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMDU2ZDZmMDYxMjQ4ZjlkNjNhNmVlN2U5ODQ4N2Y4Y2MwMjU4ODI4ODY2M2Q5NDc3MzFhMWIwMThhMjIyZjNlZGI5NmY4Y2I0ZGNmZmRjMmMiLCJpYXQiOjE2NTAxNzMwNzIuNjM5Njk5LCJuYmYiOjE2NTAxNzMwNzIuNjM5NzAyLCJleHAiOjE2ODE3MDkwNzIuNjMwODk3LCJzdWIiOiIxIiwic2NvcGVzIjpbImFjYWRlbXktdXNlciJdfQ.QXO5LkgS1Cwc-wQDdO73Aol2ZlftQ8LbiBdcfnrJ64HU4yPyH92C5EInCf7BzSAorGQrlLbpuapNCOWq4AdSqh9ZcfZndryxyD8Myhve8LH1JoCv0DToS8ccVey8MM4zPIFod69UdKdBHeensYYuuNB6dMnP6558U4J1cob4GVNqmOw8BYcoXFJSLuVLknM6EKJXYxXwyUTz_BWxwpLCWpJoJcR_8hj2JnICikZJOrC-ylQmp1mjC7OBBM9bWEUC2kAkP9nPEqIjIM_t_7sFCn3Xnr-JskXzCCyNkCMAG9mr9qZEvmR4K4k6qkt_DjB8vmMoxNzjhv8tbpRsNw4vnLbHarjYvBxli80FXKTMpshFwxANBqSxG6u8K8UoPCwlYGLZn9RqzMg-dgmHGxjC_0kR2_Hnr9msNKOsyeg7oyE74lEKD_Fgu55w7IMf-WF_jcbpPlWLSEiVL_TUSxsqh_arrN1IpUB16hgsYsGGqhV7o-aL_1BCEuUfeZ1noAnxkQSnfDkrMeYnVjx0k9hsC9pBUf5sLtbL7ZwugS4v-Zkw-5TdwmlEQPCg3Qb3gTYXDBs6Z9dq6dnfisSKQwlrdumV8LJ7-bR-YKNroGTkG8CM3Za6OBBuFk4v7pEP5_-hMNx9QqwwtW9-JPRr65qAosCzXPyIkpuXWBZDhMQcwsc" 
+
     }
     body: jsonEncode(
        {
@@ -27,7 +30,7 @@ class Login {
       var bodyData = jsonDecode(response.body);
       
       var loginData = LoginResponse.fromJson(bodyData);
-    
+      locator<SharedPreferences>().setString(AppConstants.AccessToken, loginData.token!);
 
     return loginData;
   //  Ncell@1558

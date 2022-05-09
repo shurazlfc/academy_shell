@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:academy_shell/constants/app_constants.dart';
+import 'package:academy_shell/injector.dart';
 import 'package:academy_shell/pages/views/introduction_screen.dart';
 import 'package:academy_shell/pages/auth/login_page.dart';
 import 'package:academy_shell/pages/views/main_screen.dart';
@@ -19,7 +20,7 @@ String accessToken = "";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  setupLocator();
   final prefs = await SharedPreferences.getInstance();
   bool onboardingDisplayed =
       prefs.getBool(AppConstants.onBoardingDisplayed) ?? false;
