@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, duplicate_ignore, unused_local_variable
 
-import 'package:academy_shell/services/academy_user_services.dart';
 import 'package:academy_shell/models/academy_user_model.dart';
+import 'package:academy_shell/services/academy_user_services.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import 'package:flutter/material.dart';
@@ -22,23 +22,16 @@ class _AcademyUsersState extends State<AcademyUsers> {
   @override
   void initState() {
     super.initState();
-    getdata();
+    getAcademyData();
   }
 
-  getdata() async {
+  getAcademyData() async {
     var data = await AcademyUserServices().getAcademyUsers();
     setState(() {
       academyUserData = data;
       isloaded = true;
     });
   }
-
-  // var widgets = [
-  //   Text("0"),
-  //   Text("1"),
-  //   Text("2"),
-  //   Text("3"),
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -47,78 +40,67 @@ class _AcademyUsersState extends State<AcademyUsers> {
         appBar: AppBar(
           title: Text('AcademyUser'),
         ),
-        body: ListView.builder(
-          itemCount: academyUserData!.length,
-          itemBuilder: (context, index) {
-            return ExpansionTile(
-              title: Text(academyUserData![index].name.toString()),
-              // subtitle: Text(academyUserData![index].email.toString()),
-              controlAffinity: ListTileControlAffinity.leading,
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (builder) =>
-                              EditPage(userData: academyUserData![index])));
-                    },
-                    icon: Icon(Icons.edit),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.delete),
-                  ),
-                ],
-              ),
-              children: [
-                Text(academyUserData![index].email.toString()),
-                Text(academyUserData![index].mobileNumber.toString()),
-                Text(
-                    academyUserData![index].roleParsed!.displayName.toString()),
-                Text(academyUserData![index].createdAt.toString()),
-              ],
-            );
-            // return ListTile(
-            //   leading: Text(academyUserData![index].id.toString()),
-            //   title: Text(academyUserData![index].name.toString()),
-            //   subtitle: Text(academyUserData![index].email.toString()),
-            //   trailing: Row(
-            //     mainAxisSize: MainAxisSize.min,
-            //     children: [
-            //       IconButton(
-            //         onPressed: () {
-            //           Navigator.of(context).push(MaterialPageRoute(
-            //               builder: (builder) =>
-            //                   EditPage(userData: academyUserData![index])));
-            //         },
-            //         icon: Icon(Icons.edit),
-            //       ),
-            //       IconButton(
-            //         onPressed: () {},
-            //         icon: Icon(Icons.delete),
-            //       ),
-            //     ],
-            //   ),
-            // );
-          },
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: !isloaded
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                  itemCount: academyUserData!.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16)),
+                      child: ExpansionTile(
+                        title: Text(academyUserData![index].name.toString()),
+                        // subtitle: Text(academyUserData![index].email.toString()),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (builder) => AcademyUserEdit(
+                                        userData: academyUserData![index])));
+                              },
+                              icon: Icon(Icons.edit),
+                            ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.delete),
+                            ),
+                          ],
+                        ),
+                        children: [
+                          Text(academyUserData![index].email.toString()),
+                          Text(academyUserData![index].mobileNumber.toString()),
+                          Text(academyUserData![index]
+                              .roleParsed!
+                              .displayName
+                              .toString()),
+                          Text(academyUserData![index].createdAt.toString()),
+                        ],
+                      ),
+                    );
+                  },
+                ),
         ),
       ),
     );
   }
 }
 
-class EditPage extends StatefulWidget {
-  const EditPage({Key? key, required this.userData}) : super(key: key);
+class AcademyUserEdit extends StatefulWidget {
+  const AcademyUserEdit({Key? key, required this.userData}) : super(key: key);
   final AcademyUserData userData;
 
   @override
-  State<EditPage> createState() => _EditPageState();
+  State<AcademyUserEdit> createState() => _AcademyUserEditState();
 }
 
-class _EditPageState extends State<EditPage> {
-  TextEditingController _numberController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
+class _AcademyUserEditState extends State<AcademyUserEdit> {
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
 
   @override

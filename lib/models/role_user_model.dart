@@ -1,27 +1,4 @@
 class RoleUserModel {
-  List<Data>? data;
-
-  RoleUserModel({this.data});
-
-  RoleUserModel.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Data {
   int? id;
   String? displayName;
   String? name;
@@ -29,7 +6,7 @@ class Data {
   int? noOfUsers;
   List<int>? permissions;
 
-  Data(
+  RoleUserModel(
       {this.id,
       this.displayName,
       this.name,
@@ -37,7 +14,7 @@ class Data {
       this.noOfUsers,
       this.permissions});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  RoleUserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     displayName = json['display_name'];
     name = json['name'];

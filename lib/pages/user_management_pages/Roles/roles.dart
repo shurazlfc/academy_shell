@@ -1,70 +1,71 @@
-// ignore_for_file: override_on_non_overriding_member
-
 import 'package:academy_shell/models/role_user_model.dart';
+
 import 'package:academy_shell/services/role_user_services.dart';
 import 'package:flutter/material.dart';
 
-class Roles extends StatefulWidget {
-  static const String routeName = "/roles";
-  const Roles({Key? key}) : super(key: key);
+class UserRoles extends StatefulWidget {
+  const UserRoles({Key? key}) : super(key: key);
+  static const String routeName = "/userRoles";
 
   @override
-  State<Roles> createState() => _RolesState();
+  State<UserRoles> createState() => _UserRolesState();
 }
 
-class _RolesState extends State<Roles> {
+class _UserRolesState extends State<UserRoles> {
   bool isloaded = false;
-  List<RoleUserModel>? roledata = [];
+  List<RoleUserModel>? userRoleData = [];
 
   @override
-  void initstate() {
+  void initState() {
     super.initState();
-    getdata();
+    getUserRoles();
   }
 
-  getdata() async {
-    var data = await RoleUserServices().getRoles();
+  getUserRoles() async {
+    var data = await UserRoleServices().getUserRoles();
     setState(() {
-      roledata = data;
+      userRoleData = data;
       isloaded = true;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: DataTable(
-          columns: <DataColumn>[
-            DataColumn(
-              label: const Text('S.N.'),
-              numeric: true,
-              onSort: (i, b) {},
-            ),
-            DataColumn(
-              label: const Text(' Name'),
-              numeric: false,
-              onSort: (i, b) {},
-            ),
-            DataColumn(
-              label: const Text('Email'),
-              numeric: false,
-              onSort: (i, b) {},
-            ),
-            DataColumn(
-              label: const Text('Role'),
-              numeric: false,
-              onSort: (i, b) {},
-            ),
-            DataColumn(
-              label: const Text('Actions'),
-              numeric: false,
-              onSort: (i, b) {},
-            )
-          ],
-          rows: [],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Roles'),
         ),
+        body: !isloaded
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: userRoleData!.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    shadowColor: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    child: ExpansionTile(
+                      title: Text(userRoleData![index].name.toString()),
+                      controlAffinity: ListTileControlAffinity.leading,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                              onPressed: () {}, icon: const Icon(Icons.edit)),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.delete),
+                          ),
+                        ],
+                      ),
+                      children: [
+                        Text(userRoleData![index].displayName.toString()),
+                        Text(userRoleData![index].id.toString()),
+                      ],
+                    ),
+                  );
+                }),
       ),
     );
   }

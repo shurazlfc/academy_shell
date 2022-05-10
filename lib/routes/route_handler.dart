@@ -5,6 +5,7 @@
 import 'package:academy_shell/pages/auth/login_page.dart';
 import 'package:academy_shell/pages/user_management_pages/Roles/roles.dart';
 import 'package:academy_shell/pages/user_management_pages/academic_user/academy_users.dart';
+import 'package:academy_shell/pages/user_management_pages/permission/permission.dart';
 import 'package:academy_shell/pages/views/main_screen.dart';
 import 'package:academy_shell/pages/auth/new_password_afterOTP.dart';
 import 'package:academy_shell/pages/auth/onboarding_screen.dart';
@@ -27,6 +28,9 @@ class RouteHandler {
         return MaterialPageRoute(
             builder: (context) => const ResetPasswordPage());
 
+      case UserPermissionScreen.routeName:
+        return MaterialPageRoute(
+            builder: (context) => const UserPermissionScreen());
       case OnboardingScreen.routeName:
         return MaterialPageRoute(builder: (context) => OnboardingScreen());
 
@@ -36,8 +40,8 @@ class RouteHandler {
       case OtpPage.routeName:
         return MaterialPageRoute(builder: ((context) => const OtpPage()));
 
-      case Roles.routeName:
-        return MaterialPageRoute(builder: (context) => const Roles());
+      case UserRoles.routeName:
+        return MaterialPageRoute(builder: (context) => const UserRoles());
 
       case AcademyUsers.routeName:
         return MaterialPageRoute(builder: (context) => const AcademyUsers());
